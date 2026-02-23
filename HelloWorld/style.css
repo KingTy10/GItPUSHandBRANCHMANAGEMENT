@@ -1,0 +1,41 @@
+/*
+CSS
+by Tyrone King, 2/23/26
+*/
+
+/* body */
+body {
+ font-family: Arial, sans-serif;
+ background-color: #f0f0f0;
+ color: #DD8CFF;
+ margin: 20px;
+}
+
+/* h1 heading */
+h1 {
+ color: #007bff;
+ text-align: center;
+}
+
+/* paragraphs */
+p {
+ font-size: 16px;
+ line-height: 1.5;
+ margin-bottom: 15px;
+}
+
+/* Submit button */
+.submit {
+ background-color: #28a745;
+ color: white;
+ padding: 10px 20px;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ font-size: 1em;
+}
+
+/* Hover effect for the button */
+.submit:hover {
+ background-color: #218838;
+}
