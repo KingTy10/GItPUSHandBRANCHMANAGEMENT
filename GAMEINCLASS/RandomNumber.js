@@ -1,29 +1,33 @@
-// Generate a random number between min and max
+let score = 0;
+
+// Random number generator
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Update the number in the dice box
-function updateNumber() {
+// Roll the dice
+function rollDice() {
     const min = parseInt(document.getElementById("min").value);
     const max = parseInt(document.getElementById("max").value);
+    const target = parseInt(document.getElementById("target").value);
     const resultEl = document.getElementById("result");
-    const dice = document.querySelector('.dice');
+    const dice = document.querySelector(".dice");
+    const message = document.getElementById("message");
 
-    if (isNaN(min) || isNaN(max) || min > max) {
-        resultEl.textContent = "Please enter positive numbers only.";
-        dice.style.background = "linear-gradient(145deg, #aaa, #666)"; // gray on error
+    if (isNaN(min) || isNaN(max) || min > max || isNaN(target)) {
+        message.textContent = "Please enter valid numbers!";
+        dice.style.background = "linear-gradient(145deg, #aaa, #666)";
         return;
     }
 
-    // Generate the random number
     const randomNum = getRandomNumber(min, max);
     resultEl.textContent = randomNum;
 
-    // Add the shake/animation effect
-    dice.classList.add('animate');
+    // Animate the dice
+    dice.classList.add("animate");
+    setTimeout(() => dice.classList.remove("animate"), 300);
 
-    // Optional: change dice gradient randomly for extra flair
+    // Randomize dice gradient
     const colors = [
         ["#ff8a00", "#e52e71"],
         ["#4facfe", "#00f2fe"],
@@ -33,11 +37,16 @@ function updateNumber() {
     const randColors = colors[Math.floor(Math.random() * colors.length)];
     dice.style.background = `linear-gradient(145deg, ${randColors[0]}, ${randColors[1]})`;
 
-    // Remove animation after 300ms
-    setTimeout(() => {
-        dice.classList.remove('animate');
-    }, 300);
+    // Check if player won
+    if (randomNum === target) {
+        message.textContent = "🎉 You guessed it! +1 point!";
+        score++;
+    } else {
+        message.textContent = "Try again!";
+    }
+
+    document.getElementById("score").textContent = score;
 }
 
-// Event listener for the button
-document.getElementById("generateNumber").addEventListener("click", updateNumber);
+// Event listener
+document.getElementById("rollDice").addEventListener("click", rollDice);
